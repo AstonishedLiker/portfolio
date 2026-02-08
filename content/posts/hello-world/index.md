@@ -1,11 +1,10 @@
 +++
 title = "Hello, World!"
 date = "2026-02-08T20:52:57.000+01:00"
+lastmod = "2026-02-08T23:53:21.000+01:00"
 cover = ""
 tags = []
 +++
-
-# Hello, World!
 
 I've just finished setting up my _brand new_ portfolio site.
 
