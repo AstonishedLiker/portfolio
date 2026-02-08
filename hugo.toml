@@ -1,0 +1,53 @@
+baseURL = 'https://hexaliker.fr/'
+languageCode = 'en-US'
+title = "Alexis' Portfolio"
+theme = "terminal"
+
+copyright = "Alexis Lecam - All rights reserved"
+
+[markup.highlight]
+  noClasses = false
+
+[params]
+  contentTypeName = "posts"
+
+  showMenuItems = 2
+  showLanguageSelector = false
+  fullWidthTheme = false
+  centerTheme = true
+
+  autoCover = true
+  showLastUpdated = false
+  readingTime = true
+
+  Toc = true
+
+  subtitle = "My portfolio"
+  owner = "Alexis Lecam"
+  keywords = ""
+  menuMore = "Show more"
+  readMore = "Read more"
+  readOtherPosts = "Read other posts"
+  newerPosts = "Newer posts"
+  olderPosts = "Older posts"
+  missingContentMessage = "Page not found"
+  missingBackButtonLabel = "Back to home page"
+  minuteReadingTime = "min read"
+  words = "words"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[params.logo]
+  logoText = "Portfolio"
+  logoHomeLink = "/"
+
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/"
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/blog"
