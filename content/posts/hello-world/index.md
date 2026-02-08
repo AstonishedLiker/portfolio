@@ -1,7 +1,6 @@
 +++
 title = "Hello, World!"
 date = "2026-02-08T20:52:57.000+01:00"
-author = ""
 cover = ""
 tags = []
 +++
