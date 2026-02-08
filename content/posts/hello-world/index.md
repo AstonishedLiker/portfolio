@@ -14,7 +14,7 @@ Well "finished" might be a strong word, I'll definitely keep tweaking things and
 
 This is where I'll be posting articles about topics I'm working on or find interesting. Expect posts about UEFI, reverse engineering, cybersecurity, and general programming stuff. Basically whatever I'm diving into at the time.
 
-The site is built with [Hugo](https://gohugo.io/) and uses the awesome [Terminal theme](https://github.com/panr/hugo-theme-terminal), which I think looks quite cool!
+The site is built with [Hugo](https://gohugo.io/) and uses the awesome [Terminal theme](https://github.com/panr/hugo-theme-terminal) which I think looks quite cool!
 
 ---
 
