@@ -40,6 +40,10 @@ copyright = """
   logoText = "Alexis Lecam / HexadecimalLiker"
   logoHomeLink = "/"
 
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
 [menu]
   [[menu.main]]
     identifier = "about"
