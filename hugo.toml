@@ -3,7 +3,7 @@ languageCode = 'en-US'
 title = "Alexis' Portfolio"
 theme = "terminal"
 
-copyright = "Alexis Lecam - All rights reserved"
+copyright = "© 2026 Alexis Lecam - All rights reserved"
 
 [markup.highlight]
   noClasses = false
