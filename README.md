@@ -20,7 +20,7 @@ All files and directories within the `posts/` directory and all of its subdirect
 
 Copyright (c) 2026 Alexis Lecam <alexis.lecam@hexaliker.fr>
 
-See [LICENSE.posts](./LICENSE.posts) or go to [this link](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.en) for the complete CC BY-NC-ND 4.0 License terms.
+See [LICENSE.posts](./LICENSE.posts) or go to [this link](https://creativecommons.org/licenses/by-nc-nd/4.0/) for the complete CC BY-NC-ND 4.0 License terms.
 
 This means for content in `posts/`:
 - You may share and redistribute for non-commercial purposes with attribution
