@@ -2,6 +2,7 @@
 title = "(Part 1) Snake in... UEFI?"
 description = "Seems crazy, right? Writing a game that runs before any operating system exists sounds complicated, obscure, and wildly impractical. So why would anyone bother?"
 date = "2026-02-08T23:53:21.000+01:00"
+lastmod = "2026-02-09T16:37:52.000+01:00"
 cover = ""
 tags = ["edk2", "uefi", "firmware"]
 +++
@@ -11,7 +12,7 @@ So why would anyone bother?_
 
 It turns out there are actually good reasons to do exactly that, and it's far less magical (and far more interesting) than it sounds.
 
-In this series, I'll go over the basics of UEFI and the [EDK2](https://github.com/tianocore/edk2) toolchain (a must-have for UEFI development), and document the very real pain of setting up [LLDB](https://lldb.llvm.org/) to debug [QEMU](https://www.qemu.org/) at the firmware level.
+In this series, I'll go over the basics of UEFI and the [EDK II](https://github.com/tianocore/EDK II) toolchain (a must-have for UEFI development), and document the very real pain of setting up [LLDB](https://lldb.llvm.org/) to debug [QEMU](https://www.qemu.org/) at the firmware level.
 
 ## Why?!
 
@@ -49,25 +50,30 @@ Here's essentially what happens when you power a UEFI-compliant device on:
     - This phase verifies the **PEI (Pre-EFI Execution Environment)** before handing it over control.
 - The **PEI (Pre-EFI Execution Environment)** will bring up the DRAM (as, up to that point, the firmware used the CPU's **C**ache **A**s **R**am, also known as **CAR**), and then will discover the available hardware on the platform to perform some early initialization on said hardware.
     - Findings in this phase are transferred via **HOBs (Hand-Off Blocks)** that are transmitted to the next phase, the **DXE (Driver Execution Environment) Phase**.
-- Afterwards, the **DXE (Driver Execution Environment) phase**, implemented as [`DxeMain` in EDK2](https://github.com/tianocore/edk2/blob/master/MdeModulePkg/Core/Dxe/DxeMain/DxeMain.c), will invoke the DXE dispatcher, the latter sweeping all the DXE drivers until they all execute **exactly once** (well, almost, continue reading!).
+- Afterwards, the **DXE (Driver Execution Environment) phase**, implemented as [`DxeMain` in EDK II](https://github.com/tianocore/EDK II/blob/master/MdeModulePkg/Core/Dxe/DxeMain/DxeMain.c), will invoke the DXE dispatcher, the latter sweeping all the DXE drivers until they all execute **exactly once** (well, almost, continue reading!).
     - Those sweeps happen because DXE drivers may depend on protocols that haven't been initialized yet, requiring the DXE drivers that implement said protocols to run first.
     - **A DXE driver may never load if its dependencies are never satisfied!**
-- Last but not least, the next phase is called the **BDS (Boot Device Selection) phase**, implemented as [`BdsDxe` in EDK2](https://github.com/tianocore/edk2/blob/f0542ae07d5e5e4d311bf8ae33bf26b4b1acf9f4/MdeModulePkg/Universal/BdsDxe/BdsEntry.c), is responsible for booting a storage medium, or into another DXE driver (like so-called "BIOS Setup Menus"), after DXE phase is over.
+- Last but not least, the next phase is called the **BDS (Boot Device Selection) phase**, implemented as [`BdsDxe` in EDK II](https://github.com/tianocore/EDK II/blob/f0542ae07d5e5e4d311bf8ae33bf26b4b1acf9f4/MdeModulePkg/Universal/BdsDxe/BdsEntry.c), is responsible for booting a storage medium, or into another DXE driver (like so-called "BIOS Setup Menus"), after DXE phase is over.
 
 ## That's great, but what about Snake?
 
-Right, Snake. All UEFI phases up to BDS are, [under normal circumstances](https://www.binarly.io/logofail), controlled by the **IBV** (**Independent Bios Vendor**, eg. [AMI](https://www.ami.com/), [Insyde](https://www.insyde.com/)) and the **OEM** (**Original Equipement Manufacturer**, eg. [Acer](http://acer.com/), [Gigabyte](https://gigabyte.com/)).
+Right, Snake. All UEFI phases up to BDS are, [under normal circumstances](https://www.binarly.io/logofail), controlled by the **IBV** (**Independent Bios Vendor**, eg. [AMI](https://www.ami.com/), [Insyde](https://www.insyde.com/)), the silicon vendor with [the CPU microcode](https://en.wikipedia.org/wiki/Microcode) (eg. [AMD](https://www.amd.com/), [Intel](https://www.intel.com/)), the latter included by the **IBV**, and the **OEM** (**Original Equipement Manufacturer** (eg. [Acer](http://acer.com/), [Gigabyte](https://www.gigabyte.com/)).
 
 That lets us with only one possible way of running Snake in UEFI: making a **UEFI application**.
 
-There are almost no differences between a **UEFI application** (known as `UEFI_APPLICATION` in EDK2) and a **DXE driver** (known as `UEFI_DRIVER` in EDK2), aside from the fact that the latter loads before BDS, may utilize Depex (and therefore have dependencies), and is stored on the SPI chip (the chip where the firmware's code is at). They essentially have the same capabilities.
+There are almost no API-level differences between a **UEFI application** (known as `UEFI_APPLICATION` in EDK II) and a **DXE driver** (known as `UEFI_DRIVER` in EDK II). The only notable differences are:
+- DXE drivers loads before BDS
+- They may utilize Depex (and therefore have explicit protocol dependencies)
+- They are stored on the SPI (NOR) chip
+
+In essence, they have the same capabilities (both can install protocols, write to NVRAM, etc).
 
 ## What's Next?
 
 Now that you understand *why* UEFI development matters and *how* the boot process works, we're ready to get practical!
 
 In **Part 2**, we'll:
-- Install and configure the EDK2 toolchain
+- Install and configure the EDK II toolchain
 - Understand the structure of UEFI projects (`.inf`, `.dsc`, and `.dec` files)
 - Write and compile a minimal "Hello World" UEFI application
 - Run it in QEMU and see our code execute at the firmware level
