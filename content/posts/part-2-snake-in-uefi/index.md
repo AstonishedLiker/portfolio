@@ -293,8 +293,8 @@ After writing the following to `HelloPkg/Hello/Hello.c`:
 #include <Library/UefiLib.h>
 #include <Library/DebugLib.h>
 
-EFIAPI
 EFI_STATUS
+EFIAPI
 UefiMain(
   IN EFI_HANDLE        ImageHandle,
   IN EFI_SYSTEM_TABLE  *SystemTable
