@@ -353,16 +353,6 @@ We get the following output in ConOut:
 
 It does indeed work, and calls `CpuDeadloop()` causing the guest VM to halt and letting us see the message on the screen.
 
-## Wrapping up
-
-Congratulations! You've just built and run your first UEFI application from scratch. We've covered a lot of ground in this part:
-
-- Setting up the EDK II development environment
-- Understanding the structure of `.dsc` and `.inf` files
-- Creating a complete platform definition
-- Writing, building, and testing a "Hello, World!" UEFI application
-- Running it in QEMU to verify everything works
-
 ## What's next?
 
 In **Part 3**, we'll take things to the next level. We'll dive into:
