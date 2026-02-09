@@ -37,7 +37,7 @@ copyright = """
   unsafe = true
 
 [params.logo]
-  logoText = "Alexis Lecam / HexadecimalLiker"
+  logoText = "Alexis Lecam"
   logoHomeLink = "/"
 
 [caches]
