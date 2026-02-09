@@ -12,7 +12,7 @@ copyright = """
 [params]
   contentTypeName = "posts"
 
-  showMenuItems = 2
+  showMenuItems = 4
   showLanguageSelector = false
   fullWidthTheme = false
   centerTheme = true
@@ -47,9 +47,17 @@ copyright = """
 [menu]
   [[menu.main]]
     identifier = "about"
-    name = ":: About Me"
+    name = ":: About"
     url = "/"
   [[menu.main]]
     identifier = "posts"
     name = ":: Posts"
     url = "/posts"
+  [[menu.main]]
+    identifier = "projects"
+    name = ":: Projects"
+    url = "/projects"
+  [[menu.main]]
+    identifier = "contact"
+    name = ":: Contact"
+    url = "/contact"
