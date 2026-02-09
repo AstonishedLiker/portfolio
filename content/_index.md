@@ -2,9 +2,6 @@
 title = "Home"
 +++
 
-<div id="wcb" class="carbonbadge"></div>
-<script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
-
 # About Me
 
 Driven by curiosity and precision, I'm deeply passionate about low-level cybersecurity, from MDM systems to obfuscation and DRM. I started exploring security at 11, dissecting how systems protect (and sometimes fail to protect) what lies beneath the surface.
