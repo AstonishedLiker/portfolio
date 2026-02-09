@@ -3,7 +3,6 @@ title = "Hello, World!"
 description = "I've just finished setting up my brand new portfolio site!"
 date = "2026-02-08T20:52:57.000+01:00"
 lastmod = "2026-02-08T23:53:21.000+01:00"
-cover = ""
 tags = []
 +++
 

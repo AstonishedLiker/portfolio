@@ -2,7 +2,6 @@
 title = "(Part 2) Snake in... UEFI?"
 description = "With an overview of the UEFI boot process complete, we can finally start practicing!"
 date = "2026-02-09T16:44:54.000+01:00"
-cover = ""
 toc = true
 tags = ["edk2", "uefi", "firmware"]
 +++

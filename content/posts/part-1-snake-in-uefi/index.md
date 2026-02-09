@@ -3,7 +3,6 @@ title = "(Part 1) Snake in... UEFI?"
 description = "Seems crazy, right? Writing a game that runs before any operating system exists sounds complicated, obscure, and wildly impractical. So why would anyone bother?"
 date = "2026-02-08T23:53:21.000+01:00"
 lastmod = "2026-02-09T16:37:52.000+01:00"
-cover = ""
 toc = true
 tags = ["edk2", "uefi", "firmware"]
 +++
