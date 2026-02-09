@@ -11,7 +11,7 @@ So why would anyone bother?_
 
 It turns out there are actually good reasons to do exactly that, and it's far less magical (and far more interesting) than it sounds.
 
-In this article, I'll go over the basics of UEFI and the [EDK2](https://github.com/tianocore/edk2) toolchain (a must-have for UEFI development), and document the very real pain of setting up [LLDB](https://lldb.llvm.org/) to debug [QEMU](https://www.qemu.org/) at the firmware level.
+In this series, I'll go over the basics of UEFI and the [EDK2](https://github.com/tianocore/edk2) toolchain (a must-have for UEFI development), and document the very real pain of setting up [LLDB](https://lldb.llvm.org/) to debug [QEMU](https://www.qemu.org/) at the firmware level.
 
 ## Why?!
 
