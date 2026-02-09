@@ -60,7 +60,7 @@ Right, Snake. All UEFI phases up to BDS are, [under normal circumstances](https:
 
 That lets us with only one possible way of running Snake in UEFI: making a **UEFI application**.
 
-There are almost no differences from a **UEFI application** (known as `UEFI_APPLICATION` in EDK2) and a **DXE driver** (known as `UEFI_DRIVER` in EDK2), aside from the fact that the latter loads before BDS, may utilize Depex (and therefore have dependencies), and is stored on the SPI chip (the chip where the firmware's code is at). They essentially have the same capabilities.
+There are almost no differences between a **UEFI application** (known as `UEFI_APPLICATION` in EDK2) and a **DXE driver** (known as `UEFI_DRIVER` in EDK2), aside from the fact that the latter loads before BDS, may utilize Depex (and therefore have dependencies), and is stored on the SPI chip (the chip where the firmware's code is at). They essentially have the same capabilities.
 
 ## What's Next?
 
