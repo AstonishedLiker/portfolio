@@ -3,8 +3,6 @@ title = "Projects"
 readingtime = false
 +++
 
-# Projects
-
 ### 🐍 [SnakePkg](https://github.com/AstonishedLiker/SnakePkg)
 _The classic Snake game reimagined as a UEFI Application._
 
