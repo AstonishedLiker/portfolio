@@ -23,7 +23,7 @@ I chose EDK II because it's more mature and quite literally _drops you_ into the
 
 Using an alternative like **gnu-efi** would likely require implementing many of these manually.
 
-In essence, we're buying time and simplicity by using EDK II, which is a popular reason that most IBVs base their firmware solutions on it nowadays.
+In essence, we're buying time and simplicity by using EDK II, which one of the most important reasons that makes most IBVs base their firmware solutions on it.
 
 ### Setting up the EDK2 tree
 
