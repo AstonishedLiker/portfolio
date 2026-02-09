@@ -4,6 +4,7 @@ description = "Seems crazy, right? Writing a game that runs before any operating
 date = "2026-02-08T23:53:21.000+01:00"
 lastmod = "2026-02-09T16:37:52.000+01:00"
 cover = ""
+toc = true
 tags = ["edk2", "uefi", "firmware"]
 +++
 
