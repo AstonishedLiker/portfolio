@@ -33,7 +33,7 @@ Essentially, the wide-spread adoption of UEFI results from standarization, _argu
 
 Knowing your way around UEFI is a must-have to understand how billions of devices work at the firmware nowadays.
 
-The idea to make a simple game like Snake _now makes sense_: learning to develop in a hostile environment, starting with the basics!
+The idea to make a simple game like Snake _now makes sense_: learning to develop in an intrinsically hostile ever-growing environment, starting with the basics!
 
 ## What's UEFI, technically speaking?
 
