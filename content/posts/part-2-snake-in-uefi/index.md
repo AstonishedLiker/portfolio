@@ -351,7 +351,7 @@ We get the following output in ConOut:
 
 ![A screenshot of the QEMU output after running our UEFI application, showing "Hello, World!" on the screen](./qemu-output.png)
 
-It does indeed work, and calls `CpuDeadloop()` causing the guest VM to halt and letting us see the message on the screen.
+It does indeed work, and calls `CpuDeadloop()` causing the guest VM to halt and letting us see the message on the screen!
 
 ## What's next?
 
