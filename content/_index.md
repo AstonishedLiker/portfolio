@@ -2,6 +2,8 @@
 title = "Home"
 +++
 
+> Alexis Lecam, 16 year-old french aspiring cybersecurity engineer.
+
 # About Me
 
 Driven by curiosity and precision, I'm deeply passionate about low-level cybersecurity, from MDM systems to obfuscation and DRM. I started exploring security at 11, dissecting how systems protect (and sometimes fail to protect) what lies beneath the surface.
