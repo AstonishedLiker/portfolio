@@ -43,7 +43,7 @@ Before we dive into anything programming-related, we must first understand the s
 > ![Diagram of the PI (platform initialization) boot phases](pi-boot-flow-diagram.png)
 > _Source: https://igor-blue.github.io/2021/02/04/secure-boot.html_
 
-When you power a UEFI-compliant device on:
+Here's essentially what happens when you power a UEFI-compliant device on:
 
 - After the circuitry is initialized, and, if on an Intel system, Intel ME's BootGuard verified the **IBB** (also known as **Initial Boot Block**, which contains the firmware code responsible for initializing the system), the CPU will eventually jump to the **SEC (Security) phase**.
     - This phase verifies the **PEI (Pre-EFI Execution Environment)** before handing it over control.
@@ -56,7 +56,7 @@ When you power a UEFI-compliant device on:
 
 ## That's great, but what about Snake?
 
-Right, Snake. All UEFI phases up to BDS are, [under normal circumstances](https://www.binarly.io/logofail), controlled by the **IBV** (**Independent Bios Vendor**, eg. [AMI](https://www.ami.com/), [Insyde](https://www.insyde.com/)) and the **OEM** (**Original Equipement**, eg. [Acer](http://acer.com/), [Gigabyte](https://gigabyte.com/)).
+Right, Snake. All UEFI phases up to BDS are, [under normal circumstances](https://www.binarly.io/logofail), controlled by the **IBV** (**Independent Bios Vendor**, eg. [AMI](https://www.ami.com/), [Insyde](https://www.insyde.com/)) and the **OEM** (**Original Equipement Manufacturer**, eg. [Acer](http://acer.com/), [Gigabyte](https://gigabyte.com/)).
 
 That lets us with only one possible way of running Snake in UEFI: making a **UEFI application**.
 
@@ -64,7 +64,7 @@ There are almost no differences from a **UEFI application** (known as `UEFI_APPL
 
 ## What's Next?
 
-Now that you understand *why* UEFI development matters and *how* the boot process works, we're ready to get practical.
+Now that you understand *why* UEFI development matters and *how* the boot process works, we're ready to get practical!
 
 In **Part 2**, we'll:
 - Install and configure the EDK2 toolchain
