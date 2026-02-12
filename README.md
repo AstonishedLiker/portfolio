@@ -9,7 +9,7 @@ This repository contains materials subject to different licenses depending on th
 ## Source Code and General Content
 
 All files and directories in this repository, **except**:
-- the `posts/` directory and its contents  
+- the `content/` directory and its contents  
 - third-party components explicitly listed below  
 
 are licensed under the **MIT License**, unless otherwise indicated in the file itself.
@@ -18,14 +18,14 @@ See [LICENSE](./LICENSE) for the complete MIT License terms.
 
 ## Posts and Creative Content
 
-All files and directories within the `posts/` directory and all of its subdirectories are licensed under the **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)**.
+All files and directories within the `content/` directory and all of its subdirectories are licensed under the **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)**.
 
 `Copyright (c) 2026 Alexis Lecam <alexis.lecam@hexaliker.fr>`
 
 See [LICENSE.posts](./LICENSE.posts) or visit  
 https://creativecommons.org/licenses/by-nc-nd/4.0/ for the complete license terms.
 
-This means for content in `posts/`:
+This means for content in `content/`:
 - You may share and redistribute for non-commercial purposes with attribution
 - You must provide appropriate credit and indicate the license
 - You may **not** use this content for commercial purposes
