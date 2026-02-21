@@ -11,4 +11,6 @@ Driven by curiosity and precision, I'm deeply passionate about low-level cyberse
 
 I aim to pursue a Master II through a [*Grande École*](https://en.wikipedia.org/wiki/Grande_%C3%A9cole) pathway after preparatory classes (MP2I/MPSI), and eventually contribute to high-impact security research and development.
 
+<a style="display: none" rel="me" href="https://mastodon.social/@alexis_lecam">Mastodon</a>
+
 ---
