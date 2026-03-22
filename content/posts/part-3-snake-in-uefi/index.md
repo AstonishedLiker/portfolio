@@ -441,14 +441,14 @@ Feel free to check the repository though: https://github.com/AstonishedLiker/Sna
 We can successfully debug SnakePkg within VS Code:
 
 <video controls>
-  <source src="ovmf_snake_gameplay.mp4" type="video/mp4">
+  <source src="ovmf_snake_debugging.mp4" type="video/mp4">
   Your browser doesn't seem to support embedded videos!
 </video>
 
 We're also able to play the game normally!
 
 <video controls>
-  <source src="ovmf_snake_debugging.mp4" type="video/mp4">
+  <source src="ovmf_snake_gameplay.mp4" type="video/mp4">
   Your browser doesn't seem to support embedded videos!
 </video>
 
