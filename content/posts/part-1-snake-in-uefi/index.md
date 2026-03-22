@@ -7,6 +7,8 @@ toc = true
 tags = ["edk2", "uefi", "firmware"]
 +++
 
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fhexaliker.fr%2Fposts%2Fpart-1-snake-in-uefi%2F&label=views+%28day+%2F+all+time%29&icon=eye-fill&color=%2362a0ea&message=&style=for-the-badge&tz=UTC)
+
 _Seems crazy, right? Writing a game that runs **before any operating system exists** sounds complicated, obscure, and wildly impractical.  
 So why would anyone bother?_
 

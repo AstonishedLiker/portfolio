@@ -3,6 +3,8 @@ title = "Contact"
 readingtime = false
 +++
 
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fhexaliker.fr%2Fcontact&label=views+%28day+%2F+all+time%29&icon=eye-fill&color=%2362a0ea&message=&style=for-the-badge&tz=UTC)
+
 ## If you wish to contact me, you can do so on:
 
 - **Signal:** [`hexaliker.1234`](https://signal.me/#eu/MQcd4ji-p9b2w-RuEXZmDUVbXS9jQGg-6iDA2imcYVmJeYz_Pf9DDqq75eCuypq1) (I reply faster there!!)

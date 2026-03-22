@@ -5,6 +5,8 @@ readingtime = false
 
 > _Alexis Lecam, 16 year-old french aspiring cybersecurity engineer._
 
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fhexaliker.fr%2F&label=views+%28day+%2F+all+time%29&icon=eye-fill&color=%2362a0ea&message=&style=for-the-badge&tz=UTC)
+
 # About
 
 Driven by curiosity and precision, I'm deeply passionate about low-level cybersecurity, from MDM systems to obfuscation and DRM. I started exploring security at 11, dissecting how systems protect (and sometimes fail to protect) what lies beneath the surface.

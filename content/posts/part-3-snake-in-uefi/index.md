@@ -6,6 +6,8 @@ toc = true
 tags = ["edk2", "uefi", "firmware"]
 +++
 
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fhexaliker.fr%2Fposts%2Fpart-3-snake-in-uefi%2F&label=views+%28day+%2F+all+time%29&icon=eye-fill&color=%2362a0ea&message=&style=for-the-badge&tz=UTC)
+
 With our high-level UEFI component overview, and our mandatory Hello World application written, developing SnakePkg will be a piece of cake!
 
 ## Recap from Part 2

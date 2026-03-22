@@ -3,6 +3,8 @@ title = "Projects"
 readingtime = false
 +++
 
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fhexaliker.fr%2Fprojects&label=views+%28day+%2F+all+time%29&icon=eye-fill&color=%2362a0ea&message=&style=for-the-badge&tz=UTC)
+
 ### 🐍 [SnakePkg](https://github.com/AstonishedLiker/SnakePkg)
 _The classic Snake game reimagined as a UEFI Application._
 
