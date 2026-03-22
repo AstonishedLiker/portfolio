@@ -1,7 +1,7 @@
 +++
 title = "(Part 3) Snake in... UEFI?"
 description = "Turning our idea into reality: debugging, graphics, and finally playing our UEFI Snake game!"
-date = "2026-02-14T14:07:42.000+01:00"
+date = "2026-03-22T01:58:58.000+01:00"
 toc = true
 tags = ["edk2", "uefi", "firmware"]
 +++
@@ -318,7 +318,7 @@ typedef struct {
 
 We only care about `HorizontalResolution` and `VerticalResolution` for properly scaling the grid to screens of various sizes.
 
-Combining the 2, we can write the following
+We can write the following:
 
 In `Graphics.h`
 
