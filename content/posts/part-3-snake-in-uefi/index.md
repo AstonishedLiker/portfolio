@@ -1,6 +1,6 @@
 +++
 title = "(Part 3) Snake in... UEFI?"
-description = "With an overview of the UEFI boot process complete, we can finally start practicing!"
+description = "Turning our idea into reality: debugging, graphics, and finally playing our UEFI Snake game!"
 date = "2026-02-14T14:07:42.000+01:00"
 toc = true
 tags = ["edk2", "uefi", "firmware"]
@@ -161,7 +161,7 @@ def __lldb_init_module(debugger, internal_dict):
 
 This script essentially registers a command `auto_load_symbols` that takes in 2 arguments:
 
-- `<log_file>`: the serial output of the VM (where we'll grab the applicaiton's image base from)
+- `<log_file>`: the output of the VM piped into a file (where we'll grab the application's image base from)
 - `[timeout]`: self-explainatory 
 
 The script then periodically performs a regex search with the pattern `LoadedImage\-\>ImageBase[:\s]+0x([0-9A-Fa-f]+)+\n` to grab the image base log our app will output after it gets loaded.
@@ -252,4 +252,219 @@ and `.vscode/tasks.json`
 ```
 </details>
 
-In essence, 
+In essence, when we press the fancy debug button in the VS Code debugging pane, it will automatically build the SnakePkg package, and launch QEMU, and automatically attach LLDB to the latter, loading the symbols using `auto_load_symbols`, as soon as our app outputs its base address in `ConOut`, with a timeout of 10 seconds.
+
+Here's how our app would print its base address:
+
+```c
+EFI_STATUS                    Status;
+EFI_LOADED_IMAGE_PROTOCOL     *LoadedImage;
+
+Status = gBS->OpenProtocol(
+  ImageHandle,
+  &gEfiLoadedImageProtocolGuid,
+  (VOID **)&LoadedImage,
+  ImageHandle,
+  NULL,
+  EFI_OPEN_PROTOCOL_GET_PROTOCOL
+);
+ASSERT_EFI_ERROR(Status);
+
+Print(L"LoadedImage->ImageBase: 0x%p\n", LoadedImage->ImageBase);
+
+Status = gBS->CloseProtocol(
+  ImageHandle,
+  &gEfiLoadedImageProtocolGuid,
+  ImageHandle,
+  NULL
+);
+ASSERT_EFI_ERROR(Status);
+
+```
+
+We "open" a protocol with `EFI_BOOT_SERVICES->OpenProtocol` for our own application, which is **DIFFERENT** than "locating" a protocol using `EFI_BOOT_SERVICES->LocateProtocol`, as the latter will use another component's version of that protocol, which is NOT linked to our `EFI_HANDLE`.
+
+![A screenshot of a the UEFI 2.11 specification regarding `OpenProtocol` and `LocateProtocol`](./uefi_spec_gbs_protocols.png)
+
+_Source: https://uefi.org/specs/UEFI/2.11/07_Services_Boot_Services.html#protocol-handler-services_
+
+## Graphics in all of this
+
+With that out of the way, what really remains is making Snake, which is a game. A game requires graphics, obviously. The UEFI specification allows us to use the [Graphics Output Protocol](https://uefi.org/specs/UEFI/2.11/12_Protocols_Console_Support.html#efi-graphics-output-protocol):
+
+```c
+typedef struct EFI_GRAPHICS_OUTPUT_PROTCOL {
+ EFI_GRAPHICS_OUTPUT_PROTOCOL_QUERY_MODE     QueryMode;
+ EFI_GRAPHICS_OUTPUT_PROTOCOL_SET_MODE       SetMode;
+ EFI_GRAPHICS_OUTPUT_PROTOCOL_BLT            Blt;
+ EFI_GRAPHICS_OUTPUT_PROTOCOL_MODE           *Mode;
+} EFI_GRAPHICS_OUTPUT_PROTOCOL;
+```
+
+We're interested in `EFI_GRAPHICS_OUTPUT_PROTCOL->Blt`, which allows efficient block transfering to the framebuffer (`EFI_GRAPHICS_OUTPUT_PROTOCOL_MODE->FrameBufferBase`), and the pointer `EFI_GRAPHICS_OUTPUT_PROTCOL->Mode` which allows us to get information about the current mode GOP is in.
+
+We can access the latter with `mInfo = mGop->Mode->Info`, giving us these properties:
+
+```c
+typedef struct {
+ UINT32                    Version;
+ UINT32                    HorizontalResolution;
+ UINT32                    VerticalResolution;
+ EFI_GRAPHICS_PIXEL_FORMAT PixelFormat;
+ EFI_PIXEL_BITMASK         PixelInformation;
+ UINT32                    PixelsPerScanLine;
+} EFI_GRAPHICS_OUTPUT_MODE_INFORMATION;
+```
+
+We only care about `HorizontalResolution` and `VerticalResolution` for properly scaling the grid to screens of various sizes.
+
+Combining the 2, we can write the following
+
+In `Graphics.h`
+
+```c
+#ifndef __GRAPHICS_H__
+#define __GRAPHICS_H__
+
+...
+
+extern EFI_GRAPHICS_OUTPUT_PROTOCOL           *gGop;
+extern EFI_GRAPHICS_OUTPUT_MODE_INFORMATION   *gGopInfo;
+extern EFI_HII_IMAGE_PROTOCOL                 *gHiiImage;
+extern EFI_HII_HANDLE                         gHiiHandle;
+extern UINTN                                  gMiddleScreenX;
+extern UINTN                                  gMiddleScreenY;
+
+...
+
+
+BOOLEAN
+InitGfx(
+  VOID
+);
+```
+
+and in `Graphics.c`:
+
+```c
+EFI_GRAPHICS_OUTPUT_PROTOCOL            *gGop;
+EFI_GRAPHICS_OUTPUT_MODE_INFORMATION    *gGopInfo;
+STATIC EFI_GRAPHICS_OUTPUT_BLT_PIXEL    *mBackBuffer;
+EFI_HII_IMAGE_PROTOCOL                  *gHiiImage;
+EFI_HII_HANDLE                          gHiiHandle;
+STATIC EFI_HII_DATABASE_PROTOCOL        *mHiiDatabase;
+STATIC UINTN                            mBackBufferLen;
+UINTN                                   gMiddleScreenX;
+UINTN                                   gMiddleScreenY;
+
+BOOLEAN
+InitGfx(
+  VOID
+)
+{
+  EFI_STATUS Status;
+  EFI_HII_PACKAGE_LIST_HEADER   *PackageListHeader;
+
+  Status = gBS->OpenProtocol (
+    gImageHandle,
+    &gEfiHiiPackageListProtocolGuid,
+    (VOID **)&PackageListHeader,
+    gImageHandle,
+    NULL,
+    EFI_OPEN_PROTOCOL_GET_PROTOCOL
+  );
+  ASSERT_EFI_ERROR(Status);
+
+  Status = gBS->LocateProtocol(
+    &gEfiHiiImageProtocolGuid,
+    NULL,
+    (VOID **)&gHiiImage
+  );
+  ASSERT_EFI_ERROR(Status);
+
+  Status = gBS->LocateProtocol(
+    &gEfiHiiDatabaseProtocolGuid,
+    NULL,
+    (VOID **)&mHiiDatabase
+  );
+  ASSERT_EFI_ERROR(Status);
+
+  Status = gBS->LocateProtocol(
+    &gEfiGraphicsOutputProtocolGuid,
+    NULL,
+    (VOID **)&gGop
+  );
+  ASSERT_EFI_ERROR(Status);
+
+  Status = mHiiDatabase->NewPackageList(
+    mHiiDatabase,
+    PackageListHeader,
+    NULL,
+    &gHiiHandle
+  );
+  ASSERT_EFI_ERROR(Status);
+
+  gGopInfo = gGop->Mode->Info;
+  mBackBufferLen = gGopInfo->HorizontalResolution * gGopInfo->VerticalResolution * sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL);
+  mBackBuffer = AllocateZeroPool(mBackBufferLen);
+  ASSERT(mBackBuffer);
+
+  gMiddleScreenX = (gGopInfo->HorizontalResolution / 2) - 1;
+  gMiddleScreenY = (gGopInfo->VerticalResolution / 2) - 1;
+
+  return TRUE;
+}
+```
+
+Essentially, we allocate a backbuffer which we will use to avoid screen tearing (GOP doesn't really help much), and we calculate the middle coordinates of the screen `gMiddleScreenX` and `gMiddleScreenY`. Simple and straightforward!
+
+Now that the graphics are set up, it's time to bring the Snake game to life. The core mechanics live in [`GameLogic.c`](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.c):
+
+- The game grid is just a simple 1D array of type [`GRID_MATRIX`](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.h#L18), where each [`GRID_CELL`](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.h#L17) can be either empty (cell is `0`), filled with a snake segment [(cell is `1`)](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.h#L14), or hold an apple [(cell is `2`)](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.h#L15).
+
+- The snake itself is stored as a list of cell indices, which makes movement and collision checks straightforward. Apple placement is handled by a fixed-seed (`13371337`) XorShift32 PRNG, so they spawn in the same spots every time, deterministically random, if you will. While generating a random seed is possible, I just didn't bother in this case.
+
+- Input is captured by [`QueryLastKeystroke`](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.c#L32), which reads arrow key presses from the UEFI console using a double-read loop to make sure the moves register instantly (and not 1 cycle late!!).
+
+- For visuals, [`DrawGrid`](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.c#L98) handles rendering the grid, snake, and apple, using the display's resolution provided by GOP as previously mentioned (with the constant [`CELL_PERCENTAGE_SCREEN_OCCUPANCY`](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.h#L5) set to 3%), while [`DrawScene`](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.c#L177) layers on the [TianoCore bitmap that appears at boot on OVMF builds](https://raw.githubusercontent.com/AstonishedLiker/SnakePkg/refs/heads/main/Snake/Assets/Logo.bmp), as an easter egg that references EDK-II, what we're using to make SnakePkg!
+
+- [`UpdateSnake`](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.c#L263) moves the snake forward based on the current direction, checks for collisions with the grid edges or the snake's own body, and handles apple consumption by growing the snake and increasing the score.
+
+In the end, everything comes together in the [`RunGameLogic`](https://github.com/AstonishedLiker/SnakePkg/blob/main/Snake/GameLogic.c#L333) main loop, which initializes the snake and the first apple, processes input to update direction, updates the game state, and renders the scene. The game also ramps up the speed as your score climbs! Though I'll admit, that part's a bit messy, floating point arithmetic isn't exactly UEFI's strong suit (Floating Point units are disabled, sadly).
+
+I would've linked the code here, but it's hundreds of lines long, and would ruin the reading experience.
+
+Feel free to check the repository though: https://github.com/AstonishedLiker/SnakePkg
+
+## The end product
+
+We can successfully debug SnakePkg within VS Code:
+
+<video controls>
+  <source src="ovmf_snake_gameplay.mp4" type="video/mp4">
+  Your browser doesn't seem to support embedded videos!
+</video>
+
+We're also able to play the game normally!
+
+<video controls>
+  <source src="ovmf_snake_debugging.mp4" type="video/mp4">
+  Your browser doesn't seem to support embedded videos!
+</video>
+
+...on real hardware!!
+
+<video controls>
+  <source src="snakepkg_on_thinkpad.mp4" type="video/mp4">
+  Your browser doesn't seem to support embedded videos!
+</video>
+
+## Conclusion
+
+**Conclusion**
+
+With SnakePkg now running on both QEMU and real hardware, we proved that UEFI development is not just about theory. The project started with basic EDK II concepts, moved through debugging hurdles with LLDB and EDK2Code, and ended with a working game using the Graphics Output Protocol. Every step, from a simple "Hello, World" to , was a lesson in working around UEFI's field.
+
+This was just the beginning! The skills and tools we built here apply to bigger challenges, like security research or custom firmware projects... The code is open, the process is documented, and the door is wide open for anyone willing to dive in.
+
+Until we meet again!
