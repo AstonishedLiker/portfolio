@@ -463,8 +463,8 @@ We're also able to play the game normally!
 
 **Conclusion**
 
-With SnakePkg now running on both QEMU and real hardware, we proved that UEFI development is not just about theory. The project started with basic EDK II concepts, moved through debugging hurdles with LLDB and EDK2Code, and ended with a working game using the Graphics Output Protocol. Every step, from a simple "Hello, World" to , was a lesson in working around UEFI's field.
+With SnakePkg now running on both QEMU and real hardware, we proved that UEFI development is not just about theory. The project started with basic EDK II concepts, moved through impossible-at-first debugging with LLDB and EDK2Code, and ended with a working game using the Graphics Output Protocol!
 
-This was just the beginning! The skills and tools we built here apply to bigger challenges, like security research or custom firmware projects... The code is open, the process is documented, and the door is wide open for anyone willing to dive in.
+This was just the beginning. The skills and tools we built here apply to bigger challenges, like security research or custom firmware projects... The code is open, the process is documented, and the door is wide open for anyone willing to dive in.
 
 Until we meet again!
