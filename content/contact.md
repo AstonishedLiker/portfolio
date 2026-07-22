@@ -9,7 +9,7 @@ readingtime = false
 
 - **SimpleX Chat:** [`Alexis`](https://smp19.simplex.im/a#xyElhmRm6H1ReBMtj_mmw3-zLHqhSyE_UZV9Uf9o1z0)
 - **Matrix:** [`@alexis.lecam:hexaliker.fr`](https://matrix.to/#/@alexis.lecam:hexaliker.fr)
-- **Email:** [`alexis.lecam [at] hexaliker [dot] fr`]
+- **Email:** `alexis.lecam [at] hexaliker [dot] fr`
 - **Signal:** [`hexaliker.1234`](https://signal.me/#eu/MQcd4ji-p9b2w-RuEXZmDUVbXS9jQGg-6iDA2imcYVmJeYz_Pf9DDqq75eCuypq1)
 
 ## You may also be interested in my:
