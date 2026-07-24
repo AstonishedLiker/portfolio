@@ -1,1 +1,1 @@
-{"m.homeserver": {"base_url": "https://matrix.hexaliker.fr"}}
+{"m.homeserver": {"base_url": "https://matrix.hexaliker.fr"}, "org.matrix.msc4143.rtc_foci": [{"type": "livekit", "livekit_service_url": "https://livekit.hexaliker.fr"}]}
