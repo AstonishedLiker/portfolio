@@ -13,7 +13,7 @@ Driven by curiosity and precision, I'm deeply passionate about obfuscation, firm
 
 I started exploring security at 11, by dissecting how systems protect (and sometimes fail to protect) what lies beneath the surface.
 
-I aim to pursue a Master II (recognized equivalent to an MSc.) through a [Grande École](https://en.wikipedia.org/wiki/Grande_%C3%A9cole) pathway after an intensive 2 (hopefully) year [MP2I](https://fr.wikipedia.org/wiki/Classe_pr%C3%A9paratoire_math%C3%A9matiques,_physique,_ing%C3%A9nierie_et_informatique) & [MPI](https://fr.wikipedia.org/wiki/Classe_pr%C3%A9paratoire_math%C3%A9matiques,_physique_et_informatique) [CPGE](https://en.wikipedia.org/wiki/Classe_pr%C3%A9paratoire_aux_grandes_%C3%/A9//c/o/l/e/s) cycle, and eventually contribute to high-impact security research and development.
+I aim to pursue a Master II (recognized equivalent to an MSc.) through a [Grande École](https://en.wikipedia.org/wiki/Grande_%C3%A9cole) pathway after an intensive 2 (hopefully) year [MP2I](https://fr.wikipedia.org/wiki/Classe_pr%C3%A9paratoire_math%C3%A9matiques,_physique,_ing%C3%A9nierie_et_informatique) & [MPI](https://fr.wikipedia.org/wiki/Classe_pr%C3%A9paratoire_math%C3%A9matiques,_physique_et_informatique) [CPGE](https://en.wikipedia.org/wiki/Classe_pr%C3%A9paratoire_aux_grandes_%C3%A9coles) cycle, and eventually contribute to high-impact security research and development.
 
 Check out [obfuscator.fr](https://obfuscator.fr), an upcoming Luau obfuscator!
 
